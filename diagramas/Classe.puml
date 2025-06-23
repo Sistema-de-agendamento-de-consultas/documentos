@@ -1,0 +1,94 @@
+@startuml
+
+class Paciente {
+  -id : string
+  -nome : string
+  -cpf : string
+  -data_nascimento : date
+  -telefone : string
+  -prioridade : string
+
+  +solicitarConsulta()
+  +visualizarFila()
+  +realizarCheckIn()
+}
+
+class Representante {
+  -id : string
+  -nome : string
+  -cpf : string
+  -telefone : string
+
+  +agendarParaPaciente()
+}
+
+class Consulta {
+  -id : string
+  -data_hora : datetime
+  -status : string
+  -prioridade : string
+  -check_in : boolean
+
+  +confirmar()
+  +cancelar()
+  +reagendar()
+}
+
+class Profissional {
+  -id : string
+  -nome : string
+  -especialidade : string
+  -documento : string
+
+  +realizarConsulta()
+  +acessarProntuario()
+}
+
+class Prontuario {
+  -id : string
+  -descricao : string
+  -data : date
+
+  +adicionarEntrada()
+  +consultarHistorico()
+}
+
+class Notificacao {
+  -id : string
+  -tipo : string
+  -mensagem : string
+  -destinatario : string
+  -enviada_em : datetime
+
+  +enviar()
+}
+
+class Fila {
+  -id : string
+  -data : date
+  -posicao : int
+  -status : string
+
+  +atualizarPosicao()
+  +definirPrioridade()
+}
+
+class Administrativo {
+  -id : string
+  -nome : string
+  -email : string
+
+  +remarcarConsulta()
+  +ajustarFila()
+  +cancelarAgendamento()
+}
+
+Representante "1" --> "*" Paciente : representa
+Paciente "1" --> "*" Consulta : solicita
+Paciente "1" --> "*" Prontuario : possui
+Paciente "1" --> "*" Fila : participa
+Consulta "1" --> "1" Profissional : realizada_por
+Consulta "1" --> "*" Notificacao : gera
+Consulta "1" --> "1" Prontuario : atualiza
+
+@enduml

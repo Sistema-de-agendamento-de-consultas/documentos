@@ -1,0 +1,69 @@
+@startuml
+
+entity Paciente {
+  *id : string
+  *nome : string
+  *cpf : string
+  *data_nascimento : date
+  *telefone : string
+  *prioridade : string
+}
+
+entity Representante {
+  *id : string
+  *nome : string
+  *cpf : string
+  *telefone : string
+}
+
+entity Consulta {
+  *id : string
+  *data_hora : datetime
+  *status : string
+  *prioridade : string
+  *check_in : boolean
+}
+
+entity Profissional {
+  *id : string
+  *nome : string
+  *especialidade : string
+  *documento : string
+}
+
+entity Prontuario {
+  *id : string
+  *descricao : string
+  *data : date
+}
+
+entity Notificacao {
+  *id : string
+  *tipo : string
+  *mensagem : string
+  *destinatario : string
+  *enviada_em : datetime
+}
+
+entity Fila {
+  *id : string
+  *data : date
+  *posicao : int
+  *status : string
+}
+
+entity Administrativo {
+  *id : string
+  *nome : string
+  *email : string
+}
+
+Representante ||--o{ Paciente : representa
+Paciente ||--o{ Consulta : realiza
+Paciente ||--o{ Prontuario : possui
+Paciente ||--o{ Fila : entra_em
+Consulta }o--|| Profissional : feita_por
+Consulta ||--o{ Notificacao : gera
+Consulta ||--|| Prontuario : gera
+
+@enduml
