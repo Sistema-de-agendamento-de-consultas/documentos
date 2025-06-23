@@ -1,0 +1,32 @@
+@startuml
+start
+
+:Paciente acessa o sistema;
+if (É representante?) then (Sim)
+  :Representante agenda para Paciente;
+endif
+
+:Solicita Consulta;
+:Paciente entra na Fila;
+
+:Sistema calcula posição e prioridade;
+
+if (Consulta agendada?) then (Sim)
+  :Gera Notificação de agendamento;
+  :Paciente recebe notificação;
+endif
+
+partition Administrativo {
+  :Ajustar fila?;
+  :Remarcar ou cancelar consulta?;
+}
+
+if (Dia da consulta?) then (Sim)
+  :Paciente realiza Check-In;
+  :Profissional realiza Consulta;
+
+  :Atualiza Prontuário;
+endif
+
+stop
+@enduml
