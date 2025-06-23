@@ -1,0 +1,52 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Paciente
+actor Representante
+actor Medico
+actor Agente
+actor Sistema
+actor Administrativo
+
+rectangle "Sistema de Agendamento" {
+  
+  (Agendar consulta) as RF01
+  (Cancelar consulta) as RF02a
+  (Remarcar consulta) as RF02b
+  (Buscar horários disponíveis) as RF03
+  (Visualizar agenda) as RF04
+  (Atualizar dados do paciente) as RF05
+  (Definir prioridade de agendamento) as RF06
+  (Enviar notificações) as RF07
+  (Check-in online) as RF08
+  (Visualizar prontuário) as RF09
+  (Gerenciar fila de espera) as RF10
+  (Agendar em nome do paciente) as RF11
+  (Registrar ações administrativas) as RF12
+}
+
+' Relações dos atores com os casos de uso
+Paciente --> RF01
+Paciente --> RF02a
+Paciente --> RF02b
+Paciente --> RF03
+Paciente --> RF04
+Paciente --> RF05
+Paciente --> RF08
+
+Representante --> RF01
+Representante --> RF11
+
+Agente --> RF04
+Agente --> RF11
+
+Medico --> RF04
+Medico --> RF09
+
+Administrativo --> RF06
+Administrativo --> RF10
+Administrativo --> RF12
+Sistema --> RF07
+
+@enduml
