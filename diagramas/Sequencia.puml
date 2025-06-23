@@ -1,0 +1,48 @@
+@startuml
+actor Representante
+actor Paciente
+participant "Sistema" as Sistema
+participant "Fila" as Fila
+participant "Consulta" as Consulta
+participant "Administrativo" as Administrativo
+participant "Profissional" as Profissional
+participant "Notificação" as Notificacao
+participant "Prontuário" as Prontuario
+
+== Início do fluxo ==
+Representante -> Sistema : agendarParaPaciente()
+activate Sistema
+
+Sistema -> Fila : adicionarPaciente()
+activate Fila
+Fila -> Sistema : posição e prioridade
+deactivate Fila
+
+Sistema -> Notificacao : enviarNotificacao("Consulta agendada")
+activate Notificacao
+Notificacao -> Representante : notificação recebida
+deactivate Notificacao
+
+deactivate Sistema
+
+== Dia da Consulta ==
+Paciente -> Sistema : realizarCheckIn()
+activate Sistema
+Sistema -> Consulta : atualizarCheckIn(true)
+deactivate Sistema
+
+Consulta -> Profissional : iniciarConsulta()
+activate Profissional
+Profissional -> Prontuario : acessarProntuario()
+activate Prontuario
+Prontuario -> Profissional : histórico
+deactivate Prontuario
+
+Profissional -> Prontuario : adicionarEntrada()
+deactivate Profissional
+
+Sistema -> Notificacao : enviarNotificacao("Consulta realizada")
+Notificacao -> Paciente : notificação recebida
+deactivate Notificacao
+
+@enduml
