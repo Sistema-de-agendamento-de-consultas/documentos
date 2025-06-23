@@ -1,0 +1,60 @@
+@startuml
+object Representante {
+  id = "rep123"
+  nome = "João Silva"
+  cpf = "123.456.789-00"
+  telefone = "(11) 99999-0000"
+}
+
+object Paciente {
+  id = "pac001"
+  nome = "Maria Oliveira"
+  cpf = "987.654.321-00"
+  data_nascimento = "1980-05-20"
+  telefone = "(11) 98888-1111"
+  prioridade = "Alta"
+}
+
+object Consulta {
+  id = "cons101"
+  data_hora = "2025-07-01 09:30"
+  status = "Confirmada"
+  prioridade = "Alta"
+  check_in = false
+}
+
+object Fila {
+  id = "fila202"
+  data = "2025-06-30"
+  posicao = 3
+  status = "Aguardando"
+}
+
+object Notificacao {
+  id = "notif555"
+  tipo = "Lembrete"
+  mensagem = "Sua consulta está agendada para 01/07 às 09:30."
+  destinatario = "pac001"
+  enviada_em = "2025-06-29 08:00"
+}
+
+object Profissional {
+  id = "prof007"
+  nome = "Dra. Ana Souza"
+  especialidade = "Clínico Geral"
+  documento = "CRM-SP 123456"
+}
+
+object Prontuario {
+  id = "pront001"
+  descricao = "Paciente apresenta dor lombar crônica."
+  data = "2025-07-01"
+}
+
+Representante --> Paciente : representa
+Paciente --> Consulta : realiza
+Consulta --> Fila : entra_em
+Consulta --> Profissional : feita_por
+Consulta --> Prontuario : gera
+Consulta --> Notificacao : gera
+@enduml
