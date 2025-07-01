@@ -217,18 +217,22 @@ Regras específicas que não se enquadram como requisitos funcionais:
 
 ---
 
-**9\. Diagrama de Classes**
+**9\. Diagrama de Pacotes**
+
+![Pacotes.png](https://github.com/Sistema-de-agendamento-de-consultas/documentos/blob/main/diagramas/Pacotes.png).
+
+**10\. Diagrama de Classes**
 
 ![Classe.png](https://github.com/Sistema-de-agendamento-de-consultas/documentos/blob/main/diagramas/Classe.png)
 
-**10\. Diagrama de Objetos**
+**11\. Diagrama de Objetos**
 
 ![][image4]
 
-**11\. Fluxograma**
+**12\. Fluxograma**
 
 ![Objetos.png](https://github.com/Sistema-de-agendamento-de-consultas/documentos/blob/main/diagramas/Objetos.png)
 
-**12\. Diagrama de Sequência**
+**13\. Diagrama de Sequência**
 
 ![sequencia.png](https://github.com/Sistema-de-agendamento-de-consultas/documentos/blob/main/diagramas/sequencia.png)
