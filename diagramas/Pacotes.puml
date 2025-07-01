@@ -1,0 +1,63 @@
+@startuml
+skinparam linetype ortho
+left to right direction
+
+package "sistema" {
+  package "Agendamento de Consultas" {
+    [Agendamento] 
+    [Cancelamento e Remarcação]
+    [Busca de Horários]
+    [Check-in Online]
+    [Fila de Espera]
+  }
+
+  package "Usuários" {
+    [Paciente]
+    [Representante]
+    [Agente de Saúde]
+    [Administrador]
+    [Médico]
+  }
+
+  package "Notificações" {
+    [WhatsApp API]
+    [Sistema Interno de Alertas]
+  }
+
+  package "Gestão de Dados" {
+    [Cadastro de Paciente]
+    [Prontuário Eletrônico]
+    [Validação e Prioridade]
+    [Ações Administrativas]
+  }
+
+  package "Infraestrutura" {
+    [Segurança e Backups]
+    [Interface Web/Mobile]
+    [Desempenho em Tempo Real]
+    [Acessibilidade Digital]
+  }
+}
+
+' Relações
+[Paciente] --> [Agendamento]
+[Representante] --> [Agendamento]
+[Agente de Saúde] --> [Agendamento]
+[Administrador] --> [Ações Administrativas]
+[Médico] --> [Prontuário Eletrônico]
+
+[Agendamento] --> [Busca de Horários]
+[Agendamento] --> [Validação e Prioridade]
+[Agendamento] --> [Fila de Espera]
+[Agendamento] --> [WhatsApp API]
+[Agendamento] --> [Sistema Interno de Alertas]
+
+[Cancelamento e Remarcação] --> [Ações Administrativas]
+[Cadastro de Paciente] --> [Segurança e Backups]
+
+[Check-in Online] --> [Validação e Prioridade]
+
+[WhatsApp API] --> [Infraestrutura]
+[Sistema Interno de Alertas] --> [Infraestrutura]
+
+@enduml
