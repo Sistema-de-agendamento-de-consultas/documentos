@@ -63,14 +63,14 @@ Aspectos como desempenho, segurança, usabilidade, etc.
 
 Regras específicas que não se enquadram como requisitos funcionais:
 
-| Cód. | Restrição de Escopo |
+| Cód. | Regras de Negócios |
 | ----- | ----- |
-| RE01 | O sistema **não** deve realizar diagnósticos ou prescrições médicas. |
-| RE02 | O sistema **não** deve permitir agendamentos sem validação da disponibilidade. |
-| RE03 | O sistema **não** deve fazer controle de pagamentos ou faturamentos. |
-| RE04 | O sistema **não** deve atender casos de urgência ou emergência. |
-| RE05 | O sistema **não** terá integração com sistemas externos. |
-| RE06 | O sistema **não** exigirá acesso direto apenas pelo paciente (representantes podem usar). |
+| RN01 | O sistema **não** deve realizar diagnósticos ou prescrições médicas. |
+| RN02 | O sistema **não** deve permitir agendamentos sem validação da disponibilidade. |
+| RN03 | O sistema **não** deve fazer controle de pagamentos ou faturamentos. |
+| RN04 | O sistema **não** deve atender casos de urgência ou emergência. |
+| RN05 | O sistema **não** terá integração com sistemas externos. |
+| RN06 | O sistema **não** exigirá acesso direto apenas pelo paciente (representantes podem usar). |
 
 ### 
 
@@ -80,7 +80,142 @@ Regras específicas que não se enquadram como requisitos funcionais:
 
 **8\. Casos de Uso**
 
-![Caso_de_Uso.png](https://github.com/Sistema-de-agendamento-de-consultas/documentos/blob/main/diagramas/Caso_de_Uso.png)
+![Caso_de_Uso.png](https://github.com/Sistema-de-agendamento-de-consultas/documentos/blob/main/diagramas/Caso_de_Uso.png)  
+
+---
+
+### **Caso de Uso descritivo**  
+### **Agendar de Consultas (RF01, RF11)**
+
+| Item                  | Descrição                                                                 |
+|-----------------------|--------------------------------------------------------------------------|
+| **Atores**           | Paciente, Representante, Agente                                           |
+| **Pré-condições**    | Usuário autenticado no sistema                                            |
+| **Fluxo Principal**  | Usuário seleciona especialidade, médico e horário disponível              |
+| **Pós-condições**    | Consulta agendada com prioridade definida, se aplicável                   |
+| **Regras Aplicáveis**| RN02 (validação de disponibilidade), RN06 (representantes podem agendar)  |
+
+---
+
+### **Cancelar e Remarcar Consultas (RF02)**
+
+| Item                  | Descrição                                                                 |
+|-----------------------|--------------------------------------------------------------------------|
+| **Atores**           | Paciente, Representante, Agente                                           |
+| **Pré-condições**    | Consulta previamente agendada                                             |
+| **Fluxo Principal**  | Usuário acessa a agenda, escolhe cancelar ou remarcar                    |
+| **Pós-condições**    | Consulta é reagendada ou cancelada                                       |
+| **Regras Aplicáveis**| RN02, RN06                                                                |
+
+---
+
+### **Buscar Horários Disponíveis (RF03)**
+
+| Item                  | Descrição                                                                 |
+|-----------------------|--------------------------------------------------------------------------|
+| **Atores**           | Paciente, Representante, Agente                                           |
+| **Pré-condições**    | Autenticação no sistema                                                   |
+| **Fluxo Principal**  | Usuário informa especialidade, sistema retorna horários válidos           |
+| **Pós-condições**    | Lista de horários disponíveis exibida                                     |
+| **Regras Aplicáveis**| RN02                                                                      |
+
+---
+
+### **Visualizar Agenda (RF04)**
+
+| Item                  | Descrição                                                                 |
+|-----------------------|--------------------------------------------------------------------------|
+| **Atores**           | Paciente, Médico, Agente                                                  |
+| **Pré-condições**    | Autenticação e permissão adequada                                         |
+| **Fluxo Principal**  | Acesso à agenda pessoal conforme o perfil                                 |
+| **Pós-condições**    | Agenda visualizada com informações permitidas                             |
+| **Regras Aplicáveis**| RN01, RN02                                                                |
+
+---
+
+### **Registrar/Atualizar Informações dos Pacientes (RF05)**
+
+| Item                  | Descrição                                                                 |
+|-----------------------|--------------------------------------------------------------------------|
+| **Atores**           | Paciente, Agente                                                          |
+| **Pré-condições**    | Identificação do paciente                                                 |
+| **Fluxo Principal**  | Preenchimento ou atualização de dados                                     |
+| **Pós-condições**    | Dados atualizados com segurança                                           |
+| **Regras Aplicáveis**| RN05, RNF01                                                               |
+
+---
+
+### **Definir Prioridades no Agendamento (RF06)**
+
+| Item                  | Descrição                                                                 |
+|-----------------------|--------------------------------------------------------------------------|
+| **Atores**           | Administrativo                                                           |
+| **Pré-condições**    | Consulta pendente de confirmação                                          |
+| **Fluxo Principal**  | Sistema aplica regras baseadas em urgência e perfil                       |
+| **Pós-condições**    | Ordem de atendimento ajustada                                             |
+| **Regras Aplicáveis**| RNF08, RN04                                                               |
+
+---
+
+### **Enviar Notificações (RF07)**
+
+| Item                  | Descrição                                                                 |
+|-----------------------|--------------------------------------------------------------------------|
+| **Atores**           | Sistema                                                                  |
+| **Pré-condições**    | Consulta agendada ou alterada                                             |
+| **Fluxo Principal**  | Disparo automático via WhatsApp e sistema interno                         |
+| **Pós-condições**    | Notificação enviada                                                       |
+| **Regras Aplicáveis**| RNF06, RN05                                                               |
+
+---
+
+### **Check-in Online (RF08)**
+
+| Item                  | Descrição                                                                 |
+|-----------------------|--------------------------------------------------------------------------|
+| **Atores**           | Paciente                                                                 |
+| **Pré-condições**    | Agendamento confirmado                                                    |
+| **Fluxo Principal**  | Paciente acessa sistema e confirma presença                               |
+| **Pós-condições**    | Presença registrada                                                       |
+| **Regras Aplicáveis**| RN02, RN04                                                                |
+
+---
+
+### **Visualizar Prontuários (RF09)**
+
+| Item                  | Descrição                                                                 |
+|-----------------------|--------------------------------------------------------------------------|
+| **Atores**           | Médico                                                                    |
+| **Pré-condições**    | Consulta realizada                                                        |
+| **Fluxo Principal**  | Médico acessa e registra informações no prontuário                        |
+| **Pós-condições**    | Dados disponíveis para consultas futuras                                  |
+| **Regras Aplicáveis**| RN01 (sem diagnósticos automáticos), RN05                                |
+
+---
+
+### **Gerenciar Fila de Espera / Definir Prioridades (RF10)**
+
+| Item                  | Descrição                                                                 |
+|-----------------------|--------------------------------------------------------------------------|
+| **Atores**           | Administrativo                                                           |
+| **Pré-condições**    | Excesso de agendamentos                                                   |
+| **Fluxo Principal**  | Sistema posiciona paciente conforme prioridade                            |
+| **Pós-condições**    | Paciente posicionado na fila                                              |
+| **Regras Aplicáveis**| RN04, RNF08                                                               |
+
+---
+
+### **Realizar Ações Administrativas (RF12)**
+
+| Item                  | Descrição                                                                 |
+|-----------------------|--------------------------------------------------------------------------|
+| **Atores**           | Administrativo                                                           |
+| **Pré-condições**    | Consulta existente                                                        |
+| **Fluxo Principal**  | Confirmar, cancelar ou alterar prioridade                                 |
+| **Pós-condições**    | Registro atualizado                                                       |
+| **Regras Aplicáveis**| RN03, RN05                                                                |
+
+---
 
 **9\. Diagrama de Classes**
 
